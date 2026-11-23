@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Billow Invoicing</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], hand: ['Caveat', 'cursive'] },
+    } }
+  };
+</script>
+<style type="text/tailwindcss">
+  @layer components {
+    .wrap   { @apply max-w-[1020px] mx-auto px-5; }
+    .h2     { @apply text-[30px] md:text-[40px] font-semibold tracking-[-0.025em] leading-[1.18] text-[#1e1e1e]; }
+    .btn    { @apply inline-flex items-center text-sm font-medium px-[18px] py-[10px] rounded-full bg-[#111] text-white hover:bg-black transition; }
+    .card   { @apply bg-[#fafafa] rounded-2xl; }
+    .muted  { @apply text-[#8d8d8d]; }
+    .stars  { @apply text-[#e8622c] text-[15px] tracking-[2px]; }
+    .author { @apply font-hand text-[15px] text-[#8d8d8d]; }
+    .label  { @apply text-[10px] uppercase tracking-wide text-[#8d8d8d]; }
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details[open] .plus { transform: rotate(45deg); }
+</style>
+</head>
+<body class="bg-white text-[#000000e6] font-sans antialiased text-[15px] leading-relaxed">
+
+<!-- Hero (grey band) -->
+<header class="relative bg-[#f7fafc] overflow-hidden">
+  <!-- Floating nav -->
+  <nav class="sticky top-0 z-20 px-3">
+    <div class="max-w-[990px] mx-auto bg-[#f2f4f6]/90 backdrop-blur rounded-b-2xl">
+      <a href="#" class="block text-center text-[13px] text-[#0098f2] pt-1.5">Stablecoin payouts are now live in 40+ countries ›</a>
+      <div class="h-[52px] flex items-center justify-between pl-5 pr-2">
+        <div class="flex items-center gap-10">
+          <a href="#" class="flex items-center gap-2 font-bold text-[18px] text-[#1e1e1e] tracking-tight"><span class="w-6 h-6 rounded-md bg-gradient-to-br from-[#0098f2] to-[#6c56fc]"></span>Billow</a>
+          <div class="hidden md:flex gap-6 text-sm text-[#444]">
+            <a href="#who" class="hover:text-black">Freelancer</a><a href="#who" class="hover:text-black">Agency</a><a href="#faq" class="hover:text-black">Pricing</a><a href="#faq" class="hover:text-black">Blog</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-sm">
+          <a href="#" class="hidden sm:inline px-4 py-2 text-[#444] hover:text-black">Log in</a>
+          <a href="#" class="px-4 py-2 rounded-xl bg-[#111] text-white font-medium hover:bg-black">Sign up for free</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap text-center pt-[120px] md:pt-[118px]">
+    <span class="inline-block text-[13px] text-[#0098f2] bg-[#0098f229] px-3 py-1 rounded-full">Used by 1,000+ small teams worldwide</span>
+    <h1 class="mt-4 text-[44px] md:text-[64px] font-semibold tracking-[-0.035em] leading-[1.05] text-[#1e1e1e]">Get paid in minutes</h1>
+    <p class="muted text-[15px] max-w-[460px] mx-auto mt-5">Send an invoice in seconds. Your clients pay how they like. The money goes straight to your bank or wallet, with no monthly fee.</p>
+    <a href="#" class="btn mt-6">Send my first invoice</a>
+
+    <div class="flex flex-wrap justify-center gap-x-7 gap-y-2 mt-12 text-[14px] text-[#0098f2]">
+      <span class="inline-flex items-center gap-2"><i class="w-[18px] h-[18px] rounded-full bg-[#0098f2] text-white text-[11px] not-italic grid place-items-center">✓</i>Cards 2.7% <span class="text-[#5d9c06] text-xs">▼ 0.2%</span></span>
+      <span class="inline-flex items-center gap-2"><i class="w-[18px] h-[18px] rounded-full bg-[#0098f2] text-white text-[11px] not-italic grid place-items-center">✓</i>Bank transfer 1%</span>
+      <span class="inline-flex items-center gap-2"><i class="w-[18px] h-[18px] rounded-full bg-[#0098f2] text-white text-[11px] not-italic grid place-items-center">✓</i>Stablecoin 1%</span>
+    </div>
+
+    <!-- Invoice stack, cut off by the band -->
+    <div class="relative mx-auto mt-[100px] max-w-[760px] h-[300px] md:h-[465px] text-left">
+      <div class="absolute hidden md:block left-[4%] top-[130px] w-[260px] h-[400px] bg-white rounded-sm shadow-[0_2px_12px_#0000001a] -rotate-[14deg] p-5">
+        <div class="label">Invoice no</div><div class="text-xs">002</div>
+      </div>
+      <div class="absolute hidden md:block right-[3%] top-[60px] w-[260px] h-[440px] bg-white rounded-sm shadow-[0_2px_12px_#0000001a] rotate-[4deg]"></div>
+      <div class="absolute hidden md:block left-[46%] -top-[30px] w-[260px] h-[300px] bg-white rounded-sm shadow-[0_2px_12px_#0000001a] -rotate-[12deg]"></div>
+
+      <div class="relative mx-auto w-full max-w-[570px] bg-white shadow-[0_4px_24px_#0000001a]">
+        <div class="px-6 py-4 border-b border-[#eee]"><div class="label">Invoice no</div><div class="text-[13px] text-[#1e1e1e]">001</div></div>
+        <div class="grid grid-cols-2 border-b border-[#eee]">
+          <div class="p-6 border-r border-[#eee]">
+            <div class="label mb-4">From</div>
+            <div class="w-8 h-8 rounded-full bg-[#0055ff] mb-3"></div>
+            <div class="text-[18px] md:text-[22px] font-medium text-[#1e1e1e] leading-tight">Northwind Studio</div>
+            <div class="text-xs text-[#666]">billing@northwind.studio</div>
+            <div class="text-xs muted mt-4 hidden md:block">18 Harbor Lane,<br>Portland, OR 97201</div>
+          </div>
+          <div class="p-6">
+            <div class="label mb-4">To</div>
+            <div class="w-8 h-8 rounded-full bg-[#22c55e] text-white grid place-items-center font-bold mb-3">+</div>
+            <div class="text-[18px] md:text-[22px] font-medium text-[#1e1e1e] leading-tight">Lumen Labs</div>
+            <div class="text-xs text-[#666]">billing@lumenlabs.co</div>
+            <div class="text-xs muted mt-4 hidden md:block">402 Market Street,<br>San Francisco, CA 94105</div>
+          </div>
+        </div>
+        <div class="px-6 pt-5 text-xs">
+          <div class="grid grid-cols-[2fr_.6fr_1fr_1fr] label pb-3"><span>Description</span><span>Qty</span><span>Price</span><span class="text-right">Amount</span></div>
+          <div class="grid grid-cols-[2fr_.6fr_1fr_1fr] py-2 border-b border-[#eee] text-[#1e1e1e]"><span>Design services</span><span>1</span><span>$45,000</span><span class="text-right">$45,000.00</span></div>
+          <div class="ml-auto w-1/2 flex justify-between py-3 border-b border-[#eee]"><span>Subtotal</span><span>$45,000.00</span></div>
+          <div class="ml-auto w-1/2 flex justify-between py-3"><span>Total</span><span class="text-[15px] font-semibold text-[#1e1e1e]">$45,000.00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Logos -->
+<div class="text-center pt-[72px] pb-[60px]">
+  <div class="muted text-[14px]">Used by 1,000+ businesses &amp; freelancers</div>
+  <div class="flex flex-wrap justify-center gap-x-14 gap-y-5 mt-7 text-[#b5b5b5] font-bold text-[22px] tracking-wide">
+    <span>ORBIT</span><span>⟁ fieldnote</span><span class="font-serif font-normal tracking-[.2em]">KILN&amp;CO</span><span>meridian</span><span>Parcel</span><span class="italic">atlas</span>
+  </div>
+</div>
+
+<!-- Testimonial -->
+<div class="wrap">
+  <div class="card rounded-[28px] text-center py-[96px] px-6">
+    <div class="stars text-[20px] tracking-[6px]">★★★★★</div>
+    <blockquote class="text-[24px] md:text-[32px] font-medium text-[#1e1e1e] max-w-[700px] mx-auto mt-4 tracking-[-0.02em] leading-[1.3]">“I sent the invoice before lunch, and the money landed before my coffee went cold!”</blockquote>
+    <cite class="author not-italic block mt-5 text-[18px]">Dana Reyes, founder of Reyes Design</cite>
+  </div>
+</div>
+
+<!-- Who it's for -->
+<section id="who" class="pt-[90px] md:pt-[92px]">
+  <div class="wrap text-center">
+    <div class="text-[14px] text-[#0098f2]">Who is this for?</div>
+    <h2 class="h2 mt-3">We built an invoice that<br class="hidden md:block"> works harder for your business</h2>
+    <div class="grid md:grid-cols-3 gap-6 mt-12 text-left">
+      <div class="card p-6"><h3 class="flex items-center gap-2 font-medium text-[17px] text-[#1e1e1e]"><span class="text-[#0098f2]">●</span>Freelancers</h3><p class="muted text-[14px] mt-3 leading-[1.65]">Keep more of every project and get paid faster, with automatic reminders and no subscription.</p></div>
+      <div class="card p-6"><h3 class="flex items-center gap-2 font-medium text-[17px] text-[#1e1e1e]"><span class="text-[#f200ca]">■</span>Agencies</h3><p class="muted text-[14px] mt-3 leading-[1.65]">Win back billable hours and move your team's time from admin to growth with automatic sync.</p></div>
+      <div class="card p-6"><h3 class="flex items-center gap-2 font-medium text-[17px] text-[#1e1e1e]"><span class="text-[#6c56fc]">◆</span>Consultants</h3><p class="muted text-[14px] mt-3 leading-[1.65]">Land bigger clients with steadier cash flow and a polished payment experience.</p></div>
+      <div class="card p-6"><h3 class="flex items-center gap-2 font-medium text-[17px] text-[#1e1e1e]"><span class="text-[#5d9c06]">▲</span>Contractors</h3><p class="muted text-[14px] mt-3 leading-[1.65]">Get paid on site and take on bigger jobs, with working capital from same-day payouts.</p></div>
+      <div class="card p-6"><h3 class="flex items-center gap-2 font-medium text-[17px] text-[#1e1e1e]"><span class="text-[#e8a400]">✱</span>eCommerce</h3><p class="muted text-[14px] mt-3 leading-[1.65]">Fund your next inventory run sooner. Direct bank payments mean your cash isn't tied up.</p></div>
+      <div class="card p-6"><h3 class="flex items-center gap-2 font-medium text-[17px] text-[#1e1e1e]"><span class="text-[#ff6363]">◉</span>Cross border</h3><p class="muted text-[14px] mt-3 leading-[1.65]">Reach new markets and collect local payments from clients anywhere in the world.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Problem -->
+<section class="pt-[100px] md:pt-[150px]">
+  <div class="wrap">
+    <h2 class="h2">Accounting software is a slow,<br class="hidden md:block"> costly way to bill clients</h2>
+    <div class="grid md:grid-cols-3 gap-6 mt-12">
+      <div><div class="text-[14px] font-medium text-[#0098f2]">Slow</div><p class="text-[14px] mt-2 leading-[1.65] md:min-h-[69px]"><span class="text-[#1e1e1e]">Your clients want more ways to pay.</span> <span class="muted">You need a faster way to get funds into your bank or wallet.</span></p><div class="h-[148px] rounded-2xl mt-6 grid place-items-center bg-[#0098f229]"><span class="w-7 h-7 rounded-full border-[3px] border-[#0098f2] grid place-items-center"><i class="w-2 h-2 rounded-full bg-[#0098f2]"></i></span></div></div>
+      <div><div class="text-[14px] font-medium text-[#f200ca]">Expensive</div><p class="text-[14px] mt-2 leading-[1.65] md:min-h-[69px]"><span class="text-[#1e1e1e]">You pay every month</span> <span class="muted">for features you never use, then extra card fees on top.</span></p><div class="h-[148px] rounded-2xl mt-6 grid place-items-center bg-[#f200c929]"><span class="w-6 h-7 rounded-t-full rounded-b-lg bg-[#f200ca]"></span></div></div>
+      <div><div class="text-[14px] font-medium text-[#6c56fc]">Confusing</div><p class="text-[14px] mt-2 leading-[1.65] md:min-h-[69px]"><span class="text-[#1e1e1e]">You need a simple way to invoice,</span> <span class="muted">not a move to yet another complex accounting platform.</span></p><div class="h-[148px] rounded-2xl mt-6 grid place-items-center bg-[#6c55fc29]"><span class="w-7 h-7 rounded-full bg-[#6c56fc] text-white text-sm font-bold grid place-items-center">?</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Same day -->
+<section class="pt-[100px] md:pt-[150px]">
+  <div class="wrap">
+    <h2 class="h2">Same day payments.<br>No subscription.</h2>
+    <p class="text-[14px] mt-6 max-w-[580px] leading-[1.65]"><span class="text-[#1e1e1e]">Billow offers more ways to pay and no monthly fees.</span> <span class="muted">Create a polished invoice and get paid straight to your bank account or wallet.</span></p>
+    <div class="grid md:grid-cols-3 gap-6 mt-12">
+      <div class="card p-6 h-[147px]"><div class="flex gap-1"><i class="w-[30px] h-[30px] rounded-full bg-white shadow-[0_1px_4px_#00000026] grid place-items-center"><b class="w-3.5 h-3.5 rounded-full bg-[#0098f2]"></b></i></div><p class="text-[14px] text-[#1e1e1e] mt-5 leading-[1.6]">The lowest transfer fees<br>we know of</p></div>
+      <div class="card p-6 h-[147px]"><div class="flex gap-1"><i class="w-[30px] h-[30px] rounded-full bg-white shadow-[0_1px_4px_#00000026] grid place-items-center"><b class="w-3.5 h-2.5 rounded-sm bg-[#0098f2]"></b></i><i class="w-[30px] h-[30px] rounded-full bg-white shadow-[0_1px_4px_#00000026] grid place-items-center"><b class="w-3.5 h-3.5 bg-[#f200ca]"></b></i><i class="w-[30px] h-[30px] rounded-full bg-white shadow-[0_1px_4px_#00000026] grid place-items-center"><b class="w-3.5 h-3.5 rotate-45 bg-[#6c56fc]"></b></i></div><p class="text-[14px] text-[#1e1e1e] mt-5 leading-[1.6]">Payment by card, bank transfer or<br>stablecoin</p></div>
+      <div class="card p-6 h-[147px]"><div class="flex gap-1"><i class="w-[30px] h-[30px] rounded-full bg-white shadow-[0_1px_4px_#00000026] grid place-items-center"><b class="w-3.5 h-3.5 rounded-full border-2 border-[#0098f2]"></b></i></div><p class="text-[14px] text-[#1e1e1e] mt-5 leading-[1.6]">Same-day payouts in your preferred<br>currency</p></div>
+      <div class="card p-6 h-[147px]"><div class="flex gap-1"><i class="w-[30px] h-[30px] rounded-full bg-white shadow-[0_1px_4px_#00000026] grid place-items-center"><b class="w-3.5 h-2.5 rounded-sm bg-[#0098f2]"></b></i><i class="w-[30px] h-[30px] rounded-full bg-white shadow-[0_1px_4px_#00000026] grid place-items-center"><b class="w-3.5 h-3.5 bg-[#f200ca]"></b></i></div><p class="text-[14px] text-[#1e1e1e] mt-5 leading-[1.6]">Direct payment to your bank account<br>or wallet</p></div>
+      <div class="card p-6 h-[147px]"><div class="flex gap-1"><i class="w-[30px] h-[30px] rounded-full bg-white shadow-[0_1px_4px_#00000026] grid place-items-center"><b class="w-3.5 h-3.5 rounded-sm bg-[#22c55e]"></b></i></div><p class="text-[14px] text-[#1e1e1e] mt-5 leading-[1.6]">Unlimited invoices and<br>no subscription fees</p></div>
+      <div class="card p-6 h-[147px]"><div class="flex gap-1"><i class="w-[30px] h-[30px] rounded-full bg-[#13b5ea]"></i><i class="w-[30px] h-[30px] rounded-full bg-[#2ca01c]"></i></div><p class="text-[14px] text-[#1e1e1e] mt-5 leading-[1.6]">Invoices sync with your<br>accounting software</p></div>
+    </div>
+    <a href="#" class="btn mt-12">Create an invoice</a>
+  </div>
+</section>
+
+<!-- Feature stories -->
+<section class="pt-[100px] md:pt-[150px]">
+  <div class="wrap">
+    <h2 class="h2">We built a faster invoice<br class="hidden md:block"> experience with lower fees</h2>
+
+    <div class="mt-12">
+      <div class="grid md:grid-cols-2 gap-5 md:gap-[60px] mb-12"><h3 class="text-[20px] md:text-[22px] font-medium leading-[1.4] tracking-[-0.01em] text-[#1e1e1e] max-w-[380px]">Create a beautiful invoice without hiring a designer</h3><p class="text-[14px] leading-[1.7]"><span class="text-[#1e1e1e]">Your clients deserve a great payment experience.</span> <span class="muted">Billow creates clean, minimal invoices with your logo and client details in a few clicks. Send as many as you like, and you'll never pay a monthly subscription.</span></p></div>
+      <img src="https://placehold.co/980x570/8a5a36/f0e0cc?text=Photo:+invoice+on+a+workbench" alt="Placeholder photo: an invoice on a workbench" class="w-full h-[300px] md:h-[570px] object-cover rounded-[20px]">
+      <div class="mt-10 max-w-[420px]"><div class="stars">★★★★★</div><p class="text-[14px] text-[#1e1e1e] mt-2 leading-[1.6]">"I used to design every invoice by hand. Now I share a beautiful one in a single click."</p><div class="author mt-2">Marco Tell, Designer</div></div>
+    </div>
+
+    <div class="mt-[100px]">
+      <div class="grid md:grid-cols-2 gap-5 md:gap-[60px] mb-12"><h3 class="text-[20px] md:text-[22px] font-medium leading-[1.4] tracking-[-0.01em] text-[#1e1e1e] max-w-[380px]">Send one payment link that takes every method and lowers your fees</h3><p class="text-[14px] leading-[1.7]"><span class="text-[#1e1e1e]">You don't need to juggle payment platforms.</span> <span class="muted">One link lets your client pay by bank, card or stablecoin, and you see a single clear balance.</span></p></div>
+      <img src="https://placehold.co/980x570/5b3520/f0e0cc?text=Photo:+payment+page+on+a+desk" alt="Placeholder photo: a payment page on a desk" class="w-full h-[300px] md:h-[570px] object-cover rounded-[20px]">
+      <div class="mt-10 max-w-[420px]"><div class="stars">★★★★★</div><p class="text-[14px] text-[#1e1e1e] mt-2 leading-[1.6]">"Our workflow is faster and more accurate. Every payment sits under one invoice number, even when clients switch methods."</p><div class="author mt-2">Priya Shah, Operations at Fernwood</div></div>
+    </div>
+
+    <div class="mt-[100px]">
+      <div class="grid md:grid-cols-2 gap-5 md:gap-[60px] mb-12"><h3 class="text-[20px] md:text-[22px] font-medium leading-[1.4] tracking-[-0.01em] text-[#1e1e1e] max-w-[380px]">Get same-day payouts sent directly to your bank account or wallet</h3><p class="text-[14px] leading-[1.7]"><span class="text-[#1e1e1e]">Don't let banks and accounting platforms hold your money.</span> <span class="muted">Billow converts each payment to the currency you choose and sends it straight to your bank account or wallet.</span></p></div>
+      <img src="https://placehold.co/980x570/3a2314/f0e0cc?text=Photo:+phone+with+payout+notifications" alt="Placeholder photo: a phone showing payout notifications" class="w-full h-[300px] md:h-[570px] object-cover rounded-[20px]">
+      <div class="mt-10 max-w-[420px]"><div class="stars">★★★★★</div><p class="text-[14px] text-[#1e1e1e] mt-2 leading-[1.6]">"I received my money within ten minutes. Zero hassle. It felt great."</p><div class="author mt-2">Jon Kim, Freelancer</div></div>
+    </div>
+
+    <div class="mt-[100px]">
+      <div class="grid md:grid-cols-2 gap-5 md:gap-[60px] mb-12"><h3 class="text-[20px] md:text-[22px] font-medium leading-[1.4] tracking-[-0.01em] text-[#1e1e1e] max-w-[380px]">Chase payments with automatic nudges, not awkward emails</h3><p class="text-[14px] leading-[1.7]"><span class="muted">Nobody enjoys chasing payments.</span> <span class="text-[#1e1e1e]">Billow invoices your clients on a recurring schedule and sends gentle reminders when they're late.</span> <span class="muted">You focus on the work and get paid sooner.</span></p></div>
+      <img src="https://placehold.co/980x570/6e6a64/f0e0cc?text=Photo:+reminder+email+and+recurring+invoice" alt="Placeholder photo: a reminder email next to a recurring invoice" class="w-full h-[300px] md:h-[570px] object-cover rounded-[20px]">
+      <div class="mt-10 max-w-[420px]"><div class="stars">★★★★★</div><p class="text-[14px] text-[#1e1e1e] mt-2 leading-[1.6]">"Chasing customers and checking their payment method used to be painful. Now one invoice covers every option and I get paid."</p><div class="author mt-2">Ava Lund, Founder of Lund Studio</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Integrations -->
+<section class="pt-[100px]">
+  <div class="wrap">
+    <div class="card rounded-[28px] p-7 md:p-[46px]">
+      <span class="inline-block text-[13px] text-[#0098f2] bg-[#0098f229] px-3 py-1 rounded-full">Sync your contacts and products</span>
+      <h2 class="mt-4 text-[26px] md:text-[30px] font-semibold tracking-[-0.02em] leading-[1.25] text-[#1e1e1e] max-w-[560px]">Automatically sync and reconcile every transaction with your books</h2>
+      <p class="muted text-[14px] leading-[1.65] mt-4 max-w-[720px]">Connect your accounting software to sync your contacts and products. When a client pays an invoice, the transaction appears in your books automatically.</p>
+      <div class="flex flex-wrap gap-x-10 gap-y-4 mt-9">
+        <div class="flex items-center gap-3"><span class="w-11 h-11 rounded-xl bg-[#13b5ea] grid place-items-center text-white text-xs font-bold">L</span><div class="text-[13px] leading-tight"><div class="text-[#1e1e1e]">Ledger apps</div><div class="muted">Invoices, payments, contacts, GL category</div></div></div>
+        <div class="flex items-center gap-3"><span class="w-11 h-11 rounded-xl bg-[#2ca01c] grid place-items-center text-white text-xs font-bold">B</span><div class="text-[13px] leading-tight"><div class="text-[#1e1e1e]">Bookkeeping apps</div><div class="muted">Invoices, payments, customers, products/services</div></div></div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 mt-[60px]">
+      <div><h3 class="text-[17px] font-medium text-[#1e1e1e]">PCI standards</h3><p class="muted text-[14px] mt-1 leading-[1.6]">We meet PCI compliance standards to keep your cards and bank accounts safe.</p><div class="h-[228px] rounded-2xl mt-5 grid place-items-center bg-[#0098f229]"><span class="w-[116px] h-[124px] bg-[#0098f2] text-white text-[26px] font-semibold grid place-items-center [clip-path:path('M58_0_C80_14_100_18_116_16_C116_80_96_108_58_124_C20_108_0_80_0_16_C16_18_36_14_58_0Z')]">PCI</span></div></div>
+      <div><h3 class="text-[17px] font-medium text-[#1e1e1e]">TLS encryption &amp; tokenization</h3><p class="muted text-[14px] mt-1 leading-[1.6]">We use industry protocols to tokenize and encrypt your data for your protection.</p><div class="h-[228px] rounded-2xl mt-5 grid place-items-center bg-[#6c55fc29]"><span class="w-[116px] h-[124px] bg-[#6c56fc] text-white text-[26px] font-semibold grid place-items-center [clip-path:path('M58_0_C80_14_100_18_116_16_C116_80_96_108_58_124_C20_108_0_80_0_16_C16_18_36_14_58_0Z')]">TLS</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="pt-[60px] text-center">
+  <div class="wrap">
+    <span class="inline-block text-[13px] text-[#0098f2] bg-[#0098f229] px-3 py-1 rounded-full">Accept payments from 14,000+ financial institutions</span>
+    <h2 class="mt-4 text-[34px] md:text-[44px] font-semibold tracking-[-0.03em] leading-[1.2] text-[#1e1e1e]">Send an invoice that gets<br>you paid faster</h2>
+    <p class="muted text-[14px] max-w-[400px] mx-auto mt-4 leading-[1.65]">Share a polished invoice with lower fees and get your payout straight to your bank account or wallet.</p>
+    <a href="#" class="btn mt-6">Create an invoice</a>
+    <img src="https://placehold.co/980x570/5f7a3a/f0f0e0?text=Photo:+printed+invoice+in+a+meadow" alt="Placeholder photo: a printed invoice lying in a meadow" class="w-full h-[300px] md:h-[570px] object-cover rounded-[20px] mt-12">
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="pt-[100px] pb-[90px]">
+  <div class="wrap">
+    <h2 class="text-[36px] md:text-[44px] font-semibold tracking-[-0.03em] text-[#1e1e1e]">FAQs</h2>
+    <div class="mt-8">
+      <details class="border-b border-[#eee]"><summary class="cursor-pointer list-none flex justify-between items-center h-[70px] text-[14px] text-[#1e1e1e]">Is Billow really free invoicing software?<span class="plus text-[22px] font-bold transition-transform">+</span></summary><p class="muted text-[14px] pb-5 -mt-2">Yes. There's no subscription. You pay a small fee per payment, only when a client pays you.</p></details>
+      <details class="border-b border-[#eee]"><summary class="cursor-pointer list-none flex justify-between items-center h-[70px] text-[14px] text-[#1e1e1e]">How does Billow compare to other invoicing tools on cost?<span class="plus text-[22px] font-bold transition-transform">+</span></summary><p class="muted text-[14px] pb-5 -mt-2">There are no seats or tiers, and card rates start at 2.7%. Bank and stablecoin payments cost 1%.</p></details>
+      <details class="border-b border-[#eee]"><summary class="cursor-pointer list-none flex justify-between items-center h-[70px] text-[14px] text-[#1e1e1e]">Will my clients pay an invoice from a tool they haven't used before?<span class="plus text-[22px] font-bold transition-transform">+</span></summary><p class="muted text-[14px] pb-5 -mt-2">Yes. They don't need an account. They open the link and pay with the method they already use.</p></details>
+      <details class="border-b border-[#eee]"><summary class="cursor-pointer list-none flex justify-between items-center h-[70px] text-[14px] text-[#1e1e1e]">How does the payment link work?<span class="plus text-[22px] font-bold transition-transform">+</span></summary><p class="muted text-[14px] pb-5 -mt-2">Each invoice gets a secure link that shows every payment method you've enabled.</p></details>
+      <details class="border-b border-[#eee]"><summary class="cursor-pointer list-none flex justify-between items-center h-[70px] text-[14px] text-[#1e1e1e]">What payment methods can my clients use?<span class="plus text-[22px] font-bold transition-transform">+</span></summary><p class="muted text-[14px] pb-5 -mt-2">Cards, bank transfers (ACH and SEPA), popular wallets and stablecoins.</p></details>
+      <details class="border-b border-[#eee]"><summary class="cursor-pointer list-none flex justify-between items-center h-[70px] text-[14px] text-[#1e1e1e]">How fast do I get paid?<span class="plus text-[22px] font-bold transition-transform">+</span></summary><p class="muted text-[14px] pb-5 -mt-2">Most payments settle the same day.</p></details>
+      <details class="border-b border-[#eee]"><summary class="cursor-pointer list-none flex justify-between items-center h-[70px] text-[14px] text-[#1e1e1e]">Does Billow work with my accounting software?<span class="plus text-[22px] font-bold transition-transform">+</span></summary><p class="muted text-[14px] pb-5 -mt-2">Yes. Invoices, payments and contacts sync to popular accounting apps.</p></details>
+      <details class="border-b border-[#eee]"><summary class="cursor-pointer list-none flex justify-between items-center h-[70px] text-[14px] text-[#1e1e1e]">How many invoices can I send?<span class="plus text-[22px] font-bold transition-transform">+</span></summary><p class="muted text-[14px] pb-5 -mt-2">As many as you like. There's no cap.</p></details>
+      <details class="border-b border-[#eee]"><summary class="cursor-pointer list-none flex justify-between items-center h-[70px] text-[14px] text-[#1e1e1e]">Is Billow suitable for international clients?<span class="plus text-[22px] font-bold transition-transform">+</span></summary><p class="muted text-[14px] pb-5 -mt-2">Yes. Clients in more than 40 countries can pay in their local currency or in stablecoins.</p></details>
+      <details class="border-b border-[#eee]"><summary class="cursor-pointer list-none flex justify-between items-center h-[70px] text-[14px] text-[#1e1e1e]">Who is Billow built for?<span class="plus text-[22px] font-bold transition-transform">+</span></summary><p class="muted text-[14px] pb-5 -mt-2">Freelancers, agencies, consultants, contractors and small teams who bill for their work.</p></details>
+      <details class="border-b border-[#eee]"><summary class="cursor-pointer list-none flex justify-between items-center h-[70px] text-[14px] text-[#1e1e1e]">Can I make the invoice match my brand?<span class="plus text-[22px] font-bold transition-transform">+</span></summary><p class="muted text-[14px] pb-5 -mt-2">Yes. Add your logo and details, and every invoice uses them.</p></details>
+      <details class="border-b border-[#eee]"><summary class="cursor-pointer list-none flex justify-between items-center h-[70px] text-[14px] text-[#1e1e1e]">Do I need accounting experience to use this?<span class="plus text-[22px] font-bold transition-transform">+</span></summary><p class="muted text-[14px] pb-5 -mt-2">No. If you can fill in a form, you can send an invoice.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[#f7fafc] pt-[100px] overflow-hidden">
+  <div class="wrap">
+    <div class="grid md:grid-cols-[1.9fr_.7fr_1.2fr_1.1fr] gap-10 text-[13px]">
+      <div>
+        <a href="#" class="flex items-center gap-2 font-bold text-[18px] text-[#1e1e1e] tracking-tight"><span class="w-6 h-6 rounded-md bg-gradient-to-br from-[#0098f2] to-[#6c56fc]"></span>Billow</a>
+        <p class="text-[18px] font-medium text-[#1e1e1e] leading-[1.45] mt-4 max-w-[240px]">Create the most flexible invoice in seconds</p>
+        <a href="#" class="btn mt-6">Create an invoice</a>
+        <p class="muted mt-10">Made with care</p>
+      </div>
+      <div><h4 class="text-[14px] font-medium text-[#1e1e1e] mb-3">Company</h4><div class="space-y-[11px] muted"><a href="#" class="block hover:text-black">Blog</a><a href="#" class="block hover:text-black">Guides</a><a href="#" class="block hover:text-black">Privacy</a><a href="#" class="block hover:text-black">Terms</a></div></div>
+      <div><h4 class="text-[14px] font-medium text-[#1e1e1e] mb-3">Guides</h4><div class="space-y-[11px] muted"><a href="#" class="block hover:text-black">Invoice templates</a><a href="#" class="block hover:text-black">Agency invoicing</a><a href="#" class="block hover:text-black">Freelancer invoicing</a><a href="#" class="block hover:text-black">Video production invoicing</a><a href="#" class="block hover:text-black">Graphic design invoicing</a><a href="#" class="block hover:text-black">Web design invoicing</a><a href="#" class="block hover:text-black">Recurring invoicing</a><a href="#" class="block hover:text-black">Consulting taxes</a><a href="#" class="block hover:text-black">Past due vs overdue</a></div></div>
+      <div><h4 class="text-[14px] font-medium text-[#1e1e1e] mb-3">Get paid from</h4><div class="space-y-[11px] muted"><a href="#" class="block hover:text-black">UK clients</a><a href="#" class="block hover:text-black">EU clients</a><a href="#" class="block hover:text-black">Canadian clients</a><a href="#" class="block hover:text-black">Australian clients</a><a href="#" class="block hover:text-black">Clients in Asia</a></div></div>
+    </div>
+
+    <!-- Invoice cards peeking at the bottom -->
+    <div class="relative h-[400px] mt-20">
+      <div class="absolute left-0 right-0 top-[60px] h-[340px] bg-white rounded-t-2xl border border-[#eee] opacity-70 hidden md:block">
+        <div class="grid grid-cols-2 h-full">
+          <div class="p-6 opacity-60"><div class="label">Invoice no</div><div class="text-xs">0001</div><div class="label mt-8">From</div><div class="w-8 h-8 rounded-full bg-[#6b7bff] mt-3"></div><div class="text-[18px] mt-2">Northwind Studio</div></div>
+          <div class="p-6 text-right opacity-60"><div class="label mt-[76px] text-left ml-auto w-24">To</div><div class="w-8 h-8 rounded-full bg-[#7ee0a0] mt-3 ml-auto"></div><div class="text-[18px] mt-2">Lumen Labs</div></div>
+        </div>
+      </div>
+      <div class="absolute left-1/2 -translate-x-1/2 top-0 w-[92%] max-w-[480px] bg-white rounded-t-2xl shadow-[0_4px_24px_#00000012] border border-[#eee]">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-[#eee]"><div><div class="label">Invoice no</div><div class="text-[13px] text-[#1e1e1e]">0001</div></div><span class="w-5 h-5 rounded-full border-2 border-[#1e1e1e] grid place-items-center text-[10px]">↓</span></div>
+        <div class="grid grid-cols-2 border-b border-[#eee]">
+          <div class="p-6 border-r border-[#eee]"><div class="label">From</div><div class="w-8 h-8 rounded-full bg-[#0055ff] mt-3"></div><div class="text-[18px] font-medium text-[#1e1e1e] mt-2">Northwind Studio</div><div class="text-xs text-[#666]">billing@northwind.studio</div></div>
+          <div class="p-6"><div class="label">To</div><div class="w-8 h-8 rounded-full bg-[#22c55e] text-white grid place-items-center font-bold mt-3">+</div><div class="text-[18px] font-medium text-[#1e1e1e] mt-2">Lumen Labs</div><div class="text-xs text-[#666]">billing@lumenlabs.co</div></div>
+        </div>
+        <div class="p-6 border-b border-[#eee]"><div class="label">Amount</div><div class="text-[20px] text-[#1e1e1e] mt-1">$20,800.00</div><div class="text-[11px] text-[#666]">Due by Nov 30, 2026</div></div>
+        <div class="p-6"><div class="label mb-3">Payment method</div><div class="grid grid-cols-3 gap-2 text-[12px] text-[#1e1e1e]"><span class="border border-[#e5e5e5] rounded-lg px-3 py-3">▥<br>Bank</span><span class="border border-[#e5e5e5] rounded-lg px-3 py-3">▭<br>Card</span><span class="border border-[#e5e5e5] rounded-lg px-3 py-3">◍<br>Crypto</span></div></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
